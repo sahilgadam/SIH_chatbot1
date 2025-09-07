@@ -2,6 +2,7 @@
 
 import React from "react";
 import type { FC } from "react";
+// Remove Dices from this import
 import { Sun, Moon, MessageSquare, BarChart2, GitCompare, Zap, Info, User, GraduationCap, ChevronLeft, ChevronRight } from 'lucide-react';
 import { RESEARCHER_TABS, NEWBIE_TABS, Tab, Mode } from "../../types";
 
@@ -14,6 +15,7 @@ interface HeaderProps {
     onModeToggle: () => void;
     isSidebarOpen: boolean;
     setIsSidebarOpen: (isOpen: boolean) => void;
+    // Remove the onSurpriseMe prop
 }
 
 const NavIcon: FC = () => (
@@ -34,7 +36,6 @@ export default function Header({ theme, setTheme, activeTab, setActiveTab, mode,
       <div className="flex items-center justify-between p-4 h-16">
         <div className={`flex items-center gap-3 transition-opacity duration-200 ${isSidebarOpen ? 'opacity-100' : 'opacity-0 hidden'}`}>
           <NavIcon />
-          {/* FIXED: Adjusted gradient for better visibility */}
           <h1 className="text-xl font-bold tracking-tight whitespace-nowrap bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-sky-600">FloatChat</h1>
         </div>
         <button onClick={() => setIsSidebarOpen(!isSidebarOpen)} className="p-2 rounded-full hover:bg-muted/50">
@@ -57,6 +58,7 @@ export default function Header({ theme, setTheme, activeTab, setActiveTab, mode,
             <span className={`transition-opacity duration-200 ${isSidebarOpen ? 'opacity-100' : 'opacity-0 hidden'}`}>{label}</span>
           </button>
         ))}
+        {/* REMOVED Surprise Me button from here */}
       </nav>
 
       <div className="p-4 border-t border-white/10 dark:border-gray-800/20 space-y-4">

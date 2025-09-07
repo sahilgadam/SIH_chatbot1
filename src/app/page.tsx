@@ -15,6 +15,7 @@ import InsightsTab from "./components/tabs/InsightsTab";
 import AboutTab from "./components/tabs/AboutTab";
 import NewbieHelper from "./components/tabs/newbie/NewbieHelper";
 import TuneModal from "./components/ui/TuneModal";
+import SurpriseMe from "./components/ui/SurpriseMe";
 import { Tab, MapTransition, Mode } from "./types";
 import { generateMockFloats } from "./services/mockDataService";
 import NewbieDiagram from "./components/tabs/newbie/NewbieDiagram";
@@ -27,11 +28,9 @@ export default function Page() {
   const [activeTab, setActiveTab] = useState<Tab>("visualize");
   const [messages, setMessages] = useState<any[]>([]);
   
-  // Floats data
   const allFloats = useMemo(() => generateMockFloats(75), []);
   const [filteredFloats, setFilteredFloats] = useState(allFloats);
 
-  // Map & visuals
   const [selectedVisual, setSelectedVisual] = useState<string | null>(null);
   const [mapCenter, setMapCenter] = useState<LatLngExpression>([5, 80]);
   const [mapZoom, setMapZoom] = useState(4);
@@ -39,7 +38,6 @@ export default function Page() {
   const [regionSummary, setRegionSummary] = useState<{ region: string; floats: any[] } | null>(null);
   const [mapTransition, setMapTransition] = useState<MapTransition>("fly");
 
-  // UI state
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [filters, setFilters] = useState({
     startDate: "",
@@ -51,33 +49,33 @@ export default function Page() {
     month: "",
   });
   const [isChatting, setIsChatting] = useState(false);
+  const [isQuickQsOpen, setIsQuickQsOpen] = useState(false); // State for QuickQs panel
   const [showWaveAnimation, setShowWaveAnimation] = useState(false);
   const [isTuneModalOpen, setIsTuneModalOpen] = useState(false);
+  const [isSurpriseMeOpen, setIsSurpriseMeOpen] = useState(false);
   const [showTuningAnimation, setShowTuningAnimation] = useState(false);
 
-  // Theme
   useEffect(() => {
     document.documentElement.classList.toggle("dark", theme === "dark");
   }, [theme]);
 
-  // Blur effect
+  // **UPDATED BLUR EFFECT LOGIC**
   useEffect(() => {
     const bg = document.getElementById("bg-canvas");
     if (!bg) return;
     const blurTabs = ["visualize", "compare", "insights"];
-    if (blurTabs.includes(activeTab) || (activeTab === "chat" && isChatting)) {
+    // Blur if on a blur-tab, OR if in chat and either chatting or quick-qs panel is open
+    if (blurTabs.includes(activeTab) || (activeTab === "chat" && (isChatting || isQuickQsOpen))) {
       bg.style.filter = "blur(12px) brightness(0.8)";
     } else {
       bg.style.filter = "none";
     }
-  }, [activeTab, isChatting, selectedVisual]);
+  }, [activeTab, isChatting, isQuickQsOpen, selectedVisual]);
 
-  // Sidebar toggle for selected visuals
   useEffect(() => {
     setIsSidebarOpen(selectedVisual === null);
   }, [selectedVisual]);
 
-  // Animation cleanup
   useEffect(() => {
     if (showWaveAnimation) {
       const timer = setTimeout(() => setShowWaveAnimation(false), 5000);
@@ -91,11 +89,18 @@ export default function Page() {
     setActiveTab("chat");
     setMessages([]);
     setIsChatting(false);
+    setIsQuickQsOpen(false); // Reset on mode toggle
+  };
+
+  const handleTabChange = (tab: Tab) => {
+    setActiveTab(tab);
+    setIsQuickQsOpen(false); // Reset on tab change
   };
 
   const handleNewChat = () => {
     setMessages([]);
     setIsChatting(false);
+    setIsQuickQsOpen(false); // Reset on new chat
   };
 
   const handleFloatSelect = (float: any) => {
@@ -106,7 +111,6 @@ export default function Page() {
     setMapZoom(7);
   };
 
-  // Handles both normal inputs and react-select
   const handleFilterChange = (
     e: React.ChangeEvent<HTMLInputElement> | null,
     actionMeta?: any
@@ -167,7 +171,7 @@ export default function Page() {
 
   const handleDetailClose = () => {
     setSelectedFloat(null);
-    setRegionSummary(null); // This is the crucial line to add
+    setRegionSummary(null);
   };
 
   const renderDashboard = () => {
@@ -185,6 +189,7 @@ export default function Page() {
               setFilters={setFilters}
             />
           );
+        // ... other researcher cases
         case "visualize":
           return (
             <VisualizeTab
@@ -223,8 +228,12 @@ export default function Page() {
             theme={theme}
             handleNewChat={handleNewChat}
             setIsChatting={setIsChatting}
+            onSurpriseMe={() => setIsSurpriseMeOpen(true)}
+            showQuickQs={isQuickQsOpen} // Pass state down
+            setShowQuickQs={setIsQuickQsOpen} // Pass setter down
           />
         );
+        // ... other newbie cases
       case "visualize":
         return (
           <NewbieDiagram
@@ -261,7 +270,7 @@ export default function Page() {
         theme={theme}
         setTheme={setTheme}
         activeTab={activeTab}
-        setActiveTab={(tab: Tab) => setActiveTab(tab)}
+        setActiveTab={handleTabChange} // Use the new handler
         mode={mode}
         onModeToggle={handleModeToggle}
         isSidebarOpen={isSidebarOpen}
@@ -275,6 +284,11 @@ export default function Page() {
         filters={filters}
         setFilters={setFilters}
         onApply={handleApplyFilters}
+      />
+      
+      <SurpriseMe 
+        isOpen={isSurpriseMeOpen} 
+        onClose={() => setIsSurpriseMeOpen(false)} 
       />
 
       <main

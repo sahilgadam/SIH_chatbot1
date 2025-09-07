@@ -1,0 +1,34 @@
+[
+    {
+      "id": "q1",
+      "title": "How do I start? 👋",
+      "preview": "Tell me what you need (homework, idea, or fun fact) and I’ll help.",
+      "full_answer": "Just ask me a question about the ocean! For example, you could ask 'What is an Argo float?' or 'Show me the temperature in the Indian Ocean.'",
+      "tags": ["getting-started", "help"],
+      "emoji": "👋"
+    },
+    {
+      "id": "q2",
+      "title": "What are Argo floats?",
+      "preview": "Learn about the robotic floats that collect ocean data.",
+      "full_answer": "Argo floats are amazing robots that drift in the ocean and collect data like temperature and saltiness. They help scientists understand our oceans and climate.",
+      "tags": ["argo", "basics"],
+      "emoji": "🤖"
+    },
+    {
+      "id": "q3",
+      "title": "What data do floats collect? 📊",
+      "preview": "See the key measurements like temperature , salinity , pressure , latitude & longitude , water trajectories.",
+      "full_answer": "Argo floats primarily measure temperature, salinity (saltiness), and pressure (depth). Some advanced floats can also measure oxygen, nutrients, and even the pH of the water!",
+      "tags": ["data", "argo", "basics"],
+      "emoji": "📊"
+    },
+    {
+      "id": "basics",
+      "title": "Learn Ocean Basics 📚",
+      "preview": "Explore common questions about Temperature, Salinity, and more.",
+      "full_answer": "Here are some common questions about the ocean. Click one to see the answer!",
+      "tags": ["learn", "basics"],
+      "emoji": "📚"
+    }
+  ]
