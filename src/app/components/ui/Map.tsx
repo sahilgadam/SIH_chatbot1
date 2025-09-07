@@ -1,5 +1,4 @@
 // src/app/components/ui/Map.tsx
-
 "use client";
 
 import React, { useEffect } from "react";
@@ -54,12 +53,16 @@ const ChangeView = ({ center, zoom, transition }: { center: LatLngExpression; zo
   const map = useMap();
   useEffect(() => {
     // FIX: Add a guard to ensure the map is ready before calling flyTo
-    if (map.getContainer() && map.getZoom() !== zoom) {
-        if (transition === 'instant') {
-          map.setView(center, zoom);
-        } else {
-          map.flyTo(center, zoom, { duration: 2 });
+    // The map container check prevents calling methods on an uninitialized map object.
+    if (map && map.getContainer()) {
+      if (transition === 'instant') {
+        map.setView(center, zoom);
+      } else {
+        // We also check if the center and zoom have changed to avoid unnecessary flyTo calls
+        if (map.getCenter().lat !== center[0] || map.getCenter().lng !== center[1] || map.getZoom() !== zoom) {
+            map.flyTo(center, zoom, { duration: 2 });
         }
+      }
     }
   }, [center, zoom, transition, map]);
   return null;
