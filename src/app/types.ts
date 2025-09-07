@@ -1,6 +1,6 @@
 // src/app/types.ts
 import { FC } from "react";
-import { MessageSquare, BarChart2, GitCompare, Zap, Info, User, GraduationCap } from 'lucide-react';
+import { MessageSquare, BarChart2, GitCompare, Zap, Info, User, GraduationCap, Search, Anchor } from 'lucide-react';
 
 export type Tab = "chat" | "visualize" | "compare" | "insights" | "about";
 export type MapTransition = "fly" | "instant";
@@ -14,7 +14,7 @@ export interface TabConfig {
 
 export const RESEARCHER_TABS: TabConfig[] = [
   { id: "chat", label: "Chat", icon: MessageSquare },
-  { id: "visualize", label: "Visualize", icon: BarChart2 },
+  { id: "visualize", label: "Harbor", icon: Anchor }, // Changed icon to Anchor
   { id: "compare", label: "Compare", icon: GitCompare },
   { id: "insights", label: "Insights", icon: Zap },
   { id: "about", label: "About", icon: Info },
@@ -22,7 +22,7 @@ export const RESEARCHER_TABS: TabConfig[] = [
 
 export const NEWBIE_TABS: TabConfig[] = [
     { id: "chat", label: "Helper", icon: MessageSquare },
-    { id: "visualize", label: "Diagram", icon: BarChart2 },
+    { id: "visualize", label: "Explore", icon: Search },
     { id: "compare", label: "Distinguish", icon: GitCompare },
     { id: "insights", label: "Info", icon: Zap },
     { id: "about", label: "About", icon: Info },
