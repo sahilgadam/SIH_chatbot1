@@ -163,47 +163,53 @@ export default function NewbieDiagram({ floats, filters, handleFilterChange, han
             
             {/* Region Filter */}
             <FilterGroup label="Ocean Region">
-                <Select
-                    menuPortalTarget={isMounted ? document.body : null}
-                    menuPosition="fixed"
-                    name="region"
-                    options={regionOptions}
-                    styles={customSelectStyles}
-                    placeholder="Select"
-                    isClearable
-                    onChange={handleRegionChange}
-                    value={regionOptions.find(o => o.value === filters.region) || null}
-                />
+                <ClientOnly>
+                    <Select
+                        menuPortalTarget={isMounted ? document.body : null}
+                        menuPosition="fixed"
+                        name="region"
+                        options={regionOptions}
+                        styles={customSelectStyles}
+                        placeholder="Select"
+                        isClearable
+                        onChange={handleRegionChange}
+                        value={regionOptions.find(o => o.value === filters.region) || null}
+                    />
+                </ClientOnly>
             </FilterGroup>
 
             {/* Project Filter */}
             <FilterGroup label="Project Name">
-                <Select
-                    menuPortalTarget={isMounted ? document.body : null}
-                    menuPosition="fixed"
-                    name="project_name"
-                    options={projectNameOptions}
-                    styles={customSelectStyles}
-                    placeholder="All Projects"
-                    isClearable
-                    onChange={handleProjectChange}
-                    value={projectNameOptions.find(o => o.value === filters.project_name) || null}
-                />
+                <ClientOnly>
+                    <Select
+                        menuPortalTarget={isMounted ? document.body : null}
+                        menuPosition="fixed"
+                        name="project_name"
+                        options={projectNameOptions}
+                        styles={customSelectStyles}
+                        placeholder="All Projects"
+                        isClearable
+                        onChange={handleProjectChange}
+                        value={projectNameOptions.find(o => o.value === filters.project_name) || null}
+                    />
+                </ClientOnly>
             </FilterGroup>
 
             {/* Date Range Filters */}
             <div className="space-y-4 pt-4 border-t border-white/10 dark:border-gray-700/50">
                 <FilterGroup label="Quick Select">
-                    <Select
-                        menuPortalTarget={isMounted ? document.body : null}
-                        menuPosition="fixed"
-                        name="quickSelect"
-                        options={quickSelectOptions}
-                        styles={customSelectStyles}
-                        placeholder="Select date range"
-                        isClearable
-                        onChange={handleQuickSelect}
-                    />
+                    <ClientOnly>
+                        <Select
+                            menuPortalTarget={isMounted ? document.body : null}
+                            menuPosition="fixed"
+                            name="quickSelect"
+                            options={quickSelectOptions}
+                            styles={customSelectStyles}
+                            placeholder="Select date range"
+                            isClearable
+                            onChange={handleQuickSelect}
+                        />
+                    </ClientOnly>
                 </FilterGroup>
                 <div className="grid grid-cols-1 gap-4">
                     <FilterGroup label="Start Date">

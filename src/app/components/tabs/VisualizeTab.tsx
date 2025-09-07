@@ -229,67 +229,75 @@ export default function VisualizeTab({
 
           {/* React-select advanced filters */}
           <FilterGroup label="Region">
-            <Select
-              menuPortalTarget={isMounted ? document.body : null}
-              menuPosition="fixed"
-              name="region"
-              options={regionOptions}
-              styles={customSelectStyles}
-              placeholder="Select"
-              isClearable
-              onChange={handleFilterChange}
-              value={
-                regionOptions.find((o) => o.value === filters.region) || null
-              }
-            />
+            <ClientOnly>
+                <Select
+                  menuPortalTarget={isMounted ? document.body : null}
+                  menuPosition="fixed"
+                  name="region"
+                  options={regionOptions}
+                  styles={customSelectStyles}
+                  placeholder="Select"
+                  isClearable
+                  onChange={handleFilterChange}
+                  value={
+                    regionOptions.find((o) => o.value === filters.region) || null
+                  }
+                />
+            </ClientOnly>
           </FilterGroup>
           <FilterGroup label="Parameter">
-            <Select
-              menuPortalTarget={isMounted ? document.body : null}
-              menuPosition="fixed"
-              name="parameter"
-              options={parameterOptions}
-              styles={customSelectStyles}
-              placeholder="Select"
-              isClearable
-              onChange={handleFilterChange}
-              value={
-                parameterOptions.find((o) => o.value === filters.parameter) ||
-                null
-              }
-            />
+            <ClientOnly>
+                <Select
+                  menuPortalTarget={isMounted ? document.body : null}
+                  menuPosition="fixed"
+                  name="parameter"
+                  options={parameterOptions}
+                  styles={customSelectStyles}
+                  placeholder="Select"
+                  isClearable
+                  onChange={handleFilterChange}
+                  value={
+                    parameterOptions.find((o) => o.value === filters.parameter) ||
+                    null
+                  }
+                />
+            </ClientOnly>
           </FilterGroup>
           <FilterGroup label="Data Mode">
-            <Select
-              menuPortalTarget={isMounted ? document.body : null}
-              menuPosition="fixed"
-              name="data_mode"
-              options={dataModeOptions}
-              styles={customSelectStyles}
-              placeholder="Select"
-              isClearable
-              onChange={handleFilterChange}
-              value={
-                dataModeOptions.find((o) => o.value === filters.data_mode) ||
-                null
-              }
-            />
+            <ClientOnly>
+                <Select
+                  menuPortalTarget={isMounted ? document.body : null}
+                  menuPosition="fixed"
+                  name="data_mode"
+                  options={dataModeOptions}
+                  styles={customSelectStyles}
+                  placeholder="Select"
+                  isClearable
+                  onChange={handleFilterChange}
+                  value={
+                    dataModeOptions.find((o) => o.value === filters.data_mode) ||
+                    null
+                  }
+                />
+            </ClientOnly>
           </FilterGroup>
           <FilterGroup label="Profiling Direction">
-            <Select
-              menuPortalTarget={isMounted ? document.body : null}
-              menuPosition="fixed"
-              name="direction"
-              options={directionOptions}
-              styles={customSelectStyles}
-              placeholder="Select"
-              isClearable
-              onChange={handleFilterChange}
-              value={
-                directionOptions.find((o) => o.value === filters.direction) ||
-                null
-              }
-            />
+            <ClientOnly>
+                <Select
+                  menuPortalTarget={isMounted ? document.body : null}
+                  menuPosition="fixed"
+                  name="direction"
+                  options={directionOptions}
+                  styles={customSelectStyles}
+                  placeholder="Select"
+                  isClearable
+                  onChange={handleFilterChange}
+                  value={
+                    directionOptions.find((o) => o.value === filters.direction) ||
+                    null
+                  }
+                />
+            </ClientOnly>
           </FilterGroup>
           <FilterGroup label="Cycle Number">
             <input
@@ -302,21 +310,23 @@ export default function VisualizeTab({
             />
           </FilterGroup>
           <FilterGroup label="Project Name">
-            <Select
-              menuPortalTarget={isMounted ? document.body : null}
-              menuPosition="fixed"
-              name="project_name"
-              options={projectNameOptions}
-              styles={customSelectStyles}
-              placeholder="Select"
-              isClearable
-              onChange={handleFilterChange}
-              value={
-                projectNameOptions.find(
-                  (o) => o.value === filters.project_name
-                ) || null
-              }
-            />
+            <ClientOnly>
+                <Select
+                  menuPortalTarget={isMounted ? document.body : null}
+                  menuPosition="fixed"
+                  name="project_name"
+                  options={projectNameOptions}
+                  styles={customSelectStyles}
+                  placeholder="Select"
+                  isClearable
+                  onChange={handleFilterChange}
+                  value={
+                    projectNameOptions.find(
+                      (o) => o.value === filters.project_name
+                    ) || null
+                  }
+                />
+            </ClientOnly>
           </FilterGroup>
           <FilterGroup label="Float ID">
             <div className="relative">
