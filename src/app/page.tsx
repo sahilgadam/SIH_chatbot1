@@ -17,10 +17,7 @@ import NewbieHelper from "./components/tabs/newbie/NewbieHelper";
 import TuneModal from "./components/ui/TuneModal";
 import { Tab, MapTransition, Mode } from "./types";
 import { generateMockFloats } from "./services/mockDataService";
-
-// If Repo2 had a NewbieDiagram or chatFloats, import them here:
-import NewbieDiagram from "./components/tabs/newbie/NewbieDiagram"; // make sure this exists
-import { chatFloats } from "./services/mockDataService"; // adjust if needed
+import NewbieDiagram from "./components/tabs/newbie/NewbieDiagram";
 
 export default function Page() {
   const [theme, setTheme] = useState<"light" | "dark">("dark");
@@ -168,6 +165,7 @@ export default function Page() {
 
   const handleDetailClose = () => {
     setSelectedFloat(null);
+    setRegionSummary(null); // This is the crucial line to add
   };
 
   const renderDashboard = () => {
