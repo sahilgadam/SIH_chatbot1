@@ -17,6 +17,7 @@ import NewbieHelper from "./components/tabs/newbie/NewbieHelper";
 import TuneModal from "./components/ui/TuneModal";
 import { Tab, MapTransition, Mode } from "./types";
 import { generateMockFloats } from "./services/mockDataService";
+import NewBieAbout from "./components/tabs/newbie/NewBieAbout";
 
 // If Repo2 had a NewbieDiagram or chatFloats, import them here:
 import NewbieDiagram from "./components/tabs/newbie/NewbieDiagram"; // make sure this exists
@@ -207,7 +208,7 @@ export default function Page() {
         case "insights":
           return <InsightsTab theme={theme} />;
         case "about":
-          return <AboutTab />;
+          return <NewBieAbout />;
         default:
           return null;
       }
