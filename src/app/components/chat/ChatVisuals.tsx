@@ -6,7 +6,7 @@ import React from "react";
 import dynamic from "next/dynamic";
 import { X, Download } from "lucide-react";
 
-// If AnimatedTrajectoryMap is used in Repo2, import it:
+// Resolved conflict by choosing the path from the 'main' branch, assuming 'ui' is the correct directory.
 import AnimatedTrajectoryMap from "../ui/AnimatedTrajectoryMap"; // adjust path if needed
 
 const Plot = dynamic(() => import("react-plotly.js"), { ssr: false });
