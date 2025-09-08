@@ -349,6 +349,15 @@ export default function CompareTab({ theme = "light", floats: floatsProp, depths
     animationFrameId = requestAnimationFrame(animate);
     return () => cancelAnimationFrame(animationFrameId);
   }, [plotReady, isIntersecting, baseTraces, prefersReducedMotion]);
+  
+  const getUnit = (type: DataType) => {
+    switch(type) {
+        case 'Temperature': return '°C';
+        case 'Salinity': return 'PSU';
+        case 'Humidity': return '%';
+        default: return '';
+    }
+  }
 
   const shapes: any[] = [];
   if (showThermoclineBand && dataType === 'Temperature') {
@@ -359,15 +368,6 @@ export default function CompareTab({ theme = "light", floats: floatsProp, depths
       line: { width: 1, color: 'rgba(135, 206, 235, 0.3)', dash: 'dash' },
       layer: "below"
     });
-  }
-  
-  const getUnit = (type: DataType) => {
-    switch(type) {
-        case 'Temperature': return '°C';
-        case 'Salinity': return 'PSU';
-        case 'Humidity': return '%';
-        default: return '';
-    }
   }
 
   const layout: any = {
@@ -401,7 +401,20 @@ export default function CompareTab({ theme = "light", floats: floatsProp, depths
   const config = { responsive: true, displaylogo: false };
 
   const downloadCSV = () => { /* ... implementation ... */ };
-  const exportReport = () => { /* ... implementation ... */ };
+  const exportReport = () => {
+    // Create a new anchor element
+    const link = document.createElement('a');
+    // Set the href attribute to the path of the PDF file
+    link.href = '/Report_Take_1.pdf';
+    // Set the download attribute to specify the filename
+    link.download = 'Report_Take_1.pdf';
+    // Append the link to the body
+    document.body.appendChild(link);
+    // Programmatically click the link to trigger the download
+    link.click();
+    // Remove the link from the body
+    document.body.removeChild(link);
+  };
   const toggleVisible = (id: string) => setVisibleIds(prev => prev.includes(id) ? prev.filter(p => p !== id) : [...prev, id]);
 
   return (
