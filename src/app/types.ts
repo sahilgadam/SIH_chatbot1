@@ -1,8 +1,8 @@
 // src/app/types.ts
 import { FC } from "react";
-import { MessageSquare, BarChart2, GitCompare, Zap, Info, User, GraduationCap, Search, Anchor } from 'lucide-react';
+import { MessageSquare, BarChart2, GitCompare, Zap, Info, User, GraduationCap, Search, Anchor, Award } from 'lucide-react';
 
-export type Tab = "chat" | "visualize" | "compare" | "insights" | "about";
+export type Tab = "chat" | "visualize" | "compare" | "insights" | "about" | "badges";
 export type MapTransition = "fly" | "instant";
 export type Mode = "researcher" | "newbie";
 
@@ -26,6 +26,7 @@ export const NEWBIE_TABS: TabConfig[] = [
     { id: "compare", label: "Distinguish", icon: GitCompare },
     { id: "insights", label: "Info", icon: Zap },
     { id: "about", label: "About", icon: Info },
+    { id: "badges", label: "Badges", icon: Award },
 ];
 
 // Structure for the AI's JSON response

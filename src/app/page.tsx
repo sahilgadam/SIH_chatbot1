@@ -21,6 +21,7 @@ import { generateMockFloats } from "./services/mockDataService";
 import NewbieDiagram from "./components/tabs/newbie/NewbieDiagram";
 import NewBieAbout from "./components/tabs/newbie/NewBieAbout";
 import { chatFloats } from "./services/mockDataService";
+import Badges from "./components/tabs/newbie/Badges";
 
 export default function Page() {
   const [theme, setTheme] = useState<"light" | "dark">("dark");
@@ -257,6 +258,8 @@ export default function Page() {
         return <InsightsTab theme={theme} />;
       case "about":
         return <NewBieAbout />;
+      case "badges":
+        return <Badges />;
       default:
         return null;
     }

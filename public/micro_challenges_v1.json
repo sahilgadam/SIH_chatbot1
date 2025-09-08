@@ -1,0 +1,272 @@
+[
+    {
+      "id":"mc_001",
+      "text":"Find the current sea-surface temperature (SST) nearest your city using a buoy or satellite site and paste the number here.",
+      "difficulty":"easy",
+      "time_minutes":3,
+      "tags":["ocean","temperature","data","research"],
+      "safety_note":"Online lookup only — no field visit required.",
+      "reward":{"xp":5,"badge_hint":"sst_spotter"}
+    },
+    {
+      "id":"mc_002",
+      "text":"Write a 6-word story about the ocean right now.",
+      "difficulty":"easy",
+      "time_minutes":2,
+      "tags":["creative","writing","ocean"],
+      "safety_note":"All creative content must be family-friendly.",
+      "reward":{"xp":3,"badge_hint":"sea_story"}
+    },
+    {
+      "id":"mc_003",
+      "text":"Estimate the pressure at 500 meters depth. Show your quick calc (1 atm per 10 m).",
+      "difficulty":"easy",
+      "time_minutes":2,
+      "tags":["pressure","math","ocean"],
+      "safety_note":"Math-only — no diving.",
+      "reward":{"xp":4,"badge_hint":"pressure_pro"}
+    },
+    {
+      "id":"mc_004",
+      "text":"Find the latitude & longitude of Challenger Deep or another famous ocean feature and paste the coords.",
+      "difficulty":"easy",
+      "time_minutes":3,
+      "tags":["latlong","geography","research"],
+      "safety_note":"Online lookup only.",
+      "reward":{"xp":5,"badge_hint":"deep_locator"}
+    },
+    {
+      "id":"mc_005",
+      "text":"Look up the salinity reading at the nearest ocean buoy and note how it compares to 35 PSU (higher/lower).",
+      "difficulty":"easy",
+      "time_minutes":3,
+      "tags":["salinity","data","ocean"],
+      "safety_note":"Online lookup only.",
+      "reward":{"xp":5,"badge_hint":"salinity_seeker"}
+    },
+    {
+      "id":"mc_006",
+      "text":"Sketch (30–60 seconds) a tiny poster that explains what a thermocline is. Take a photo of your sketch or describe it in one sentence.",
+      "difficulty":"easy",
+      "time_minutes":3,
+      "tags":["creative","education","temperature"],
+      "safety_note":"Photos are optional; do not share personal info in images.",
+      "reward":{"xp":5,"badge_hint":"thermocline_artist"}
+    },
+    {
+      "id":"mc_007",
+      "text":"Pick one ocean current (Gulf Stream, Kuroshio, or Agulhas). Write one sentence saying how it affects weather or a coastline.",
+      "difficulty":"easy",
+      "time_minutes":2,
+      "tags":["currents","research","ocean"],
+      "safety_note":"Online reading only.",
+      "reward":{"xp":3,"badge_hint":"current_reader"}
+    },
+    {
+      "id":"mc_008",
+      "text":"Open a map and trace a possible path a floating plastic piece might take from your coast to the nearest gyre — describe the route in 2 lines.",
+      "difficulty":"medium",
+      "time_minutes":5,
+      "tags":["trajectory","currents","creative"],
+      "safety_note":"Map tracing only; no field action required.",
+      "reward":{"xp":8,"badge_hint":"gyre_tracker"}
+    },
+    {
+      "id":"mc_009",
+      "text":"Listen to a 30–60 second whale call or ocean sound clip (we’ll provide one) and write 1 line describing how it made you feel.",
+      "difficulty":"easy",
+      "time_minutes":2,
+      "tags":["audio","ocean","creative"],
+      "safety_note":"Audio provided in-app; do not upload copyrighted clips yourself.",
+      "reward":{"xp":3,"badge_hint":"sound_listener"}
+    },
+    {
+      "id":"mc_010",
+      "text":"Find a fun ocean fact (temperature, salinity, or pressure related) and share it — bonus if you add an emoji.",
+      "difficulty":"easy",
+      "time_minutes":2,
+      "tags":["facts","ocean","surprise"],
+      "safety_note":"Keep facts age-appropriate.",
+      "reward":{"xp":3,"badge_hint":"fact_finder"}
+    },
+    {
+      "id":"mc_011",
+      "text":"Quick thought experiment: If a water parcel sinks at the North Atlantic, how long might it take to reappear elsewhere? Give a one-sentence guess.",
+      "difficulty":"easy",
+      "time_minutes":2,
+      "tags":["trajectory","thermohaline","thinking"],
+      "safety_note":"No experiments, reasoning only.",
+      "reward":{"xp":4,"badge_hint":"ocean_time"}
+    },
+    {
+      "id":"mc_012",
+      "text":"Using online data, compare two sea-surface temps (different latitudes). Paste both temps and say which one’s warmer.",
+      "difficulty":"medium",
+      "time_minutes":5,
+      "tags":["temperature","data","research"],
+      "safety_note":"Online lookup only.",
+      "reward":{"xp":6,"badge_hint":"temp_comparer"}
+    },
+    {
+      "id":"mc_013",
+      "text":"Create a 1-line mnemonic to remember that salinity + cold = denser water (example: 'Salty cold sinks bold').",
+      "difficulty":"easy",
+      "time_minutes":2,
+      "tags":["creative","salinity","education"],
+      "safety_note":"Family-friendly language only.",
+      "reward":{"xp":3,"badge_hint":"mnemonic_maker"}
+    },
+    {
+      "id":"mc_014",
+      "text":"Design a 10-second social post caption that would make people curious about ocean pressure (we’ll make a share card if you want).",
+      "difficulty":"easy",
+      "time_minutes":3,
+      "tags":["creative","social","pressure"],
+      "safety_note":"No sharing without explicit opt-in.",
+      "reward":{"xp":4,"badge_hint":"captioneer"}
+    },
+    {
+      "id":"mc_015",
+      "text":"Look up one recent news headline about oceans (pollution, warming, science) and paste the headline with the date.",
+      "difficulty":"easy",
+      "time_minutes":3,
+      "tags":["news","research","ocean"],
+      "safety_note":"Be mindful of reliable sources; use reputable outlets.",
+      "reward":{"xp":4,"badge_hint":"news_hound"}
+    },
+    {
+      "id":"mc_016",
+      "text":"Estimate how much pressure a sub at 2,000 m feels: give the answer in atmospheres and in a short sentence.",
+      "difficulty":"easy",
+      "time_minutes":2,
+      "tags":["pressure","math","ocean"],
+      "safety_note":"Calculation only.",
+      "reward":{"xp":4,"badge_hint":"deep_calc"}
+    },
+    {
+      "id":"mc_017",
+      "text":"Name three things that change salinity in the ocean (quick list).",
+      "difficulty":"easy",
+      "time_minutes":1,
+      "tags":["salinity","education","quick"],
+      "safety_note":"Short answer only.",
+      "reward":{"xp":2,"badge_hint":"salt_list"}
+    },
+    {
+      "id":"mc_018",
+      "text":"Draw a tiny 1-minute map showing a current (arrow) and label where it moves warm or cold water (photo optional).",
+      "difficulty":"easy",
+      "time_minutes":3,
+      "tags":["creative","currents","map"],
+      "safety_note":"Photos optional; avoid personal images.",
+      "reward":{"xp":5,"badge_hint":"mini_cartographer"}
+    },
+    {
+      "id":"mc_019",
+      "text":"Quick role-play: pretend you’re a water molecule — write 2 lines about where you’d like to travel in the ocean and why.",
+      "difficulty":"easy",
+      "time_minutes":2,
+      "tags":["creative","trajectory","fun"],
+      "safety_note":"Family-friendly content.",
+      "reward":{"xp":3,"badge_hint":"water_voice"}
+    },
+    {
+      "id":"mc_020",
+      "text":"Find one coastal buoy or citizen-science webcam and screenshot (or paste its name) — note one observation (wave height, birds, color).",
+      "difficulty":"medium",
+      "time_minutes":5,
+      "tags":["observation","data","geo"],
+      "safety_note":"Screenshots ok; no personal photos.",
+      "reward":{"xp":6,"badge_hint":"buoy_buddy"}
+    },
+    {
+      "id":"mc_021",
+      "text":"Short DIY: measure water temperature at home with a thermometer (tap water vs. ice water) and describe the difference in one sentence.",
+      "difficulty":"easy",
+      "time_minutes":3,
+      "tags":["kitchen","temperature","experiment"],
+      "safety_note":"Use safe kitchen items only; supervise kids.",
+      "reward":{"xp":4,"badge_hint":"kitchen_thermo"}
+    },
+    {
+      "id":"mc_022",
+      "text":"Find the center coordinates of a major ocean gyre (North Pacific or Atlantic) and paste the approximate lat/long.",
+      "difficulty":"medium",
+      "time_minutes":4,
+      "tags":["latlong","gyre","research"],
+      "safety_note":"Online research only.",
+      "reward":{"xp":6,"badge_hint":"gyre_locator"}
+    },
+    {
+      "id":"mc_023",
+      "text":"Two-line explainer: How does the ocean help regulate Earth's climate? Keep it short and clear.",
+      "difficulty":"easy",
+      "time_minutes":2,
+      "tags":["climate","education","ocean"],
+      "safety_note":"Short answer only.",
+      "reward":{"xp":4,"badge_hint":"climate_summarizer"}
+    },
+    {
+      "id":"mc_024",
+      "text":"Quick demo idea: name one way plastic gets trapped by currents (one sentence) and one tiny action you can take to reduce plastic waste.",
+      "difficulty":"easy",
+      "time_minutes":2,
+      "tags":["pollution","currents","action"],
+      "safety_note":"Action must be safe and legal.",
+      "reward":{"xp":4,"badge_hint":"plastic_action"}
+    },
+    {
+      "id":"mc_025",
+      "text":"Find a scientific term (thermocline, halocline, pycnocline). Define it in one short sentence in your own words.",
+      "difficulty":"easy",
+      "time_minutes":2,
+      "tags":["vocab","education","ocean"],
+      "safety_note":"Keep definition safe and age-appropriate.",
+      "reward":{"xp":3,"badge_hint":"term_master"}
+    },
+    {
+      "id":"mc_026",
+      "text":"Tiny coding task (if you like): write a 2-line pseudocode to simulate a buoy drifting east with current speed x for t minutes.",
+      "difficulty":"medium",
+      "time_minutes":5,
+      "tags":["code","trajectory","data"],
+      "safety_note":"Pseudocode only; no real-world deployment.",
+      "reward":{"xp":8,"badge_hint":"buoy_coder"}
+    },
+    {
+      "id":"mc_027",
+      "text":"Observation: If you’re near water safely, look for signs of salinity differences (e.g., color changes, foam) and describe in one line. (Optional: photo.)",
+      "difficulty":"medium",
+      "time_minutes":4,
+      "tags":["field","observation","salinity"],
+      "safety_note":"Only if you are safely near water and in daylight; do not go near cliffs or rough surf; get adult supervision if unsure.",
+      "reward":{"xp":7,"badge_hint":"shore_observer"}
+    },
+    {
+      "id":"mc_028",
+      "text":"Find a short video (≤1 minute) of bioluminescence and paste the source link; add 1-sentence reaction.",
+      "difficulty":"easy",
+      "time_minutes":3,
+      "tags":["biology","audio-video","ocean"],
+      "safety_note":"Use reputable public sources; no uploads of private videos.",
+      "reward":{"xp":4,"badge_hint":"light_lover"}
+    },
+    {
+      "id":"mc_029",
+      "text":"Make a 3-bullet mini-plan for a local beach clean-up (what to bring, one safety step, one disposal plan).",
+      "difficulty":"easy",
+      "time_minutes":3,
+      "tags":["action","community","pollution"],
+      "safety_note":"If organizing real events, follow local laws and safety rules; this task is planning-only.",
+      "reward":{"xp":5,"badge_hint":"cleanup_planner"}
+    },
+    {
+      "id":"mc_030",
+      "text":"Visualize: draw a 30-second timeline that shows a water parcel’s life: surface → sink → deep travel → resurface. Describe each stage in 3 words.",
+      "difficulty":"medium",
+      "time_minutes":5,
+      "tags":["trajectory","education","creative"],
+      "safety_note":"Drawing only; no field work.",
+      "reward":{"xp":6,"badge_hint":"parcel_path"}
+    }
+  ]

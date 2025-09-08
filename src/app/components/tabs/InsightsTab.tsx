@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState, FC } from "react";
-// FIXED: Replaced 'BrainCircuit' and 'Wand2' with more common icons 'Bot' and 'Lightbulb'
 import { Layers, Zap, Droplets, Globe, Hash, Sparkles, Bot, Lightbulb, Thermometer, Wind, Tornado  } from 'lucide-react';
 import InsightDetailView from "../ui/InsightDetailView";
 
@@ -207,7 +206,7 @@ export default function InsightsTab({ theme }) {
     return (
         <section className="p-4 md:p-6 lg:p-8 h-full flex flex-col">
             <div className="mb-8">
-                 <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight text-foreground mb-2 flex items-center gap-3">
+                <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight text-foreground mb-2 flex items-center gap-3">
                     <Bot size={36} className="text-primary" />
                     AI-Powered Insights
                 </h1>

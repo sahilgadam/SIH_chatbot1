@@ -1,0 +1,20 @@
+[
+    {
+      "id": "curious",
+      "title": "I’m curious",
+      "quickqs": ["q2", "q3", "basics"],
+      "optional_challenges": []
+    },
+    {
+      "id": "help",
+      "title": "I need help",
+      "quickqs": ["q1", "q2", "q3"],
+      "optional_challenges": []
+    },
+    {
+      "id": "browse",
+      "title": "Just browsing",
+      "quickqs": ["q1", "q2", "basics"],
+      "optional_challenges": ["mc_001"]
+    }
+  ]

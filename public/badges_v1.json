@@ -1,0 +1,50 @@
+[
+    {
+      "id": "first_chat",
+      "name": "First Chat",
+      "desc": "Sent your first message in Newbie",
+      "tier": "bronze",
+      "criteria": { "action": "sendMessage", "count": 1 },
+      "icon": "MessageSquare"
+    },
+    {
+      "id": "quick_starter",
+      "name": "Quick Starter",
+      "desc": "Clicked a Quick-Q",
+      "tier": "bronze",
+      "criteria": { "action": "clickQuickQ", "count": 1 },
+      "icon": "Zap"
+    },
+    {
+      "id": "fact_collector_3",
+      "name": "Fact Collector",
+      "desc": "Saved 3 facts",
+      "tier": "silver",
+      "criteria": { "action": "likeFact", "count": 3 },
+      "icon": "Heart"
+    },
+    {
+      "id": "curious_mind_5",
+      "name": "Curious Mind",
+      "desc": "Opened Newbie 5 times",
+      "tier": "gold",
+      "criteria": { "action": "openNewbie", "count": 5 },
+      "icon": "Brain"
+    },
+    {
+      "id": "ocean_explorer",
+      "name": "Ocean Explorer",
+      "desc": "Completed 10 ocean micro-challenges",
+      "tier": "gold",
+      "criteria": { "action": "completeChallenge", "count": 10 },
+      "icon": "Anchor"
+    },
+    {
+      "id": "secret_aurora",
+      "name": "Night Owl",
+      "desc": "Used Surprise Me between 2–3 AM (local time) 3 times",
+      "tier": "secret",
+      "criteria": { "action": "surpriseMe", "count": 3, "time": { "start": 2, "end": 3 } },
+      "icon": "Moon"
+    }
+  ]

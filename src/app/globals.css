@@ -480,3 +480,67 @@ body {
   border-color: #374151;
   background-color: #161b22;
 }
+
+/* Styles for the new onboarding card */
+.onboarding-card {
+    animation: fadeInDown 0.5s ease-out forwards;
+}
+
+.onboarding-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 1rem;
+    background-color: var(--card);
+    border-radius: 0.5rem;
+    transition: all 0.2s ease-in-out;
+    border: 1px solid var(--border);
+}
+
+.onboarding-button:hover {
+    background-color: hsla(var(--primary) / 0.1);
+    border-color: var(--primary);
+}
+
+.onboarding-icon {
+    margin-bottom: 0.5rem;
+    transition: transform 0.2s ease-in-out;
+}
+
+.onboarding-button:hover .onboarding-icon {
+    transform: scale(1.1);
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -10px);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, 0);
+    }
+}
+
+/* ADD THIS TO THE END OF src/app/globals.css */
+
+@keyframes glowing-border {
+  0% { border-color: rgba(59, 130, 246, 0.5); box-shadow: 0 0 5px rgba(59, 130, 246, 0.3); }
+  50% { border-color: rgba(59, 130, 246, 0.8); box-shadow: 0 0 15px rgba(59, 130, 246, 0.6); }
+  100% { border-color: rgba(59, 130, 246, 0.5); box-shadow: 0 0 5px rgba(59, 130, 246, 0.3); }
+}
+
+.earned-badge-border {
+  animation: glowing-border 2s infinite alternate ease-in-out;
+}
+
+/* ADD THESE STYLES TO THE END OF src/app/globals.css */
+
+.challenge-card {
+  transition: box-shadow 0.3s ease;
+}
+.challenge-card:hover {
+  box-shadow: 0 0 15px var(--primary-foreground);
+}
