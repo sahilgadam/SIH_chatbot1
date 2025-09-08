@@ -3,7 +3,7 @@
 
 import React from 'react';
 import ResearcherCompare from './ReasercherCompare';
-import NewbieCompare from './newbie/NewbieDistinguish';
+import NewbieDistinguish from './newbie/NewbieDistinguish';
 import { Mode } from '../../types';
 
 type Props = {
@@ -12,9 +12,12 @@ type Props = {
 };
 
 export default function CompareTab({ theme = "light", mode = 'researcher' }: Props) {
+  // This is the switch that directs to the correct component.
   if (mode === 'newbie') {
-    return <NewbieCompare theme={theme} />;
+    // For "Newbie" mode, it MUST render NewbieDistinguish.
+    return <NewbieDistinguish theme={theme} />;
   }
   
+  // For "Researcher" mode, it renders the full-featured component.
   return <ResearcherCompare theme={theme} />;
 }
