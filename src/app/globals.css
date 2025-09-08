@@ -2,17 +2,17 @@
 @import "tailwindcss";
 @import "leaflet/dist/leaflet.css";
 
-/* --- Coastal Breeze Light Theme --- */
+/* --- Sunny Day Light Theme (UPDATED) --- */
 :root {
-  --background: #f0f7ff; /* Light sky blue */
-  --foreground: #2d3748; /* Dark slate gray */
-  --primary: #0077b6;    /* Vibrant ocean blue */
+  --background: #f8fafc; /* A very light, clean off-white */
+  --foreground: #0f172a; /* Strong dark text for contrast */
+  --primary: #0ea5e9;    /* A brighter, more energetic sky blue */
   --primary-foreground: #ffffff;
   --card: #ffffff;
-  --card-foreground: #2d3748;
-  --muted: #e2e8f0;      /* Soft gray */
-  --muted-foreground: #4a5568; /* Medium slate gray */
-  --water-color: #007bff;
+  --card-foreground: #0f172a;
+  --muted: #f1f5f9;      /* Lighter gray for muted elements */
+  --muted-foreground: #64748b; /* Softer gray for muted text */
+  --water-color: #0ea5e9;
 }
 
 /* --- Midnight Ocean Dark Theme --- */
@@ -40,7 +40,8 @@ body {
   color: var(--foreground);
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 
-  background: linear-gradient(-45deg, #e0f2fe, #f0f7ff, #e6f7ff, #dcf8ff);
+  /* UPDATED: Brighter gradient for light mode */
+  background: linear-gradient(-45deg, #e0f7ff, #f0f9ff, #fefce8, #f0f9ff);
   background-size: 400% 400%;
   animation: gradient-animation 25s ease infinite;
 }

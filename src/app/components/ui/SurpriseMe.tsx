@@ -1,8 +1,10 @@
+// src/app/components/ui/SurpriseMe.tsx
 "use client";
 
 import React, { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Heart, RefreshCw, Star } from 'lucide-react';
+import { trackAction } from '@/app/services/badgeService'; // Import the service
 
 interface Fact {
     id: string;
@@ -28,32 +30,34 @@ const SurpriseMe: React.FC<SurpriseMeProps> = ({ isOpen, onClose }) => {
 
     // Load initial data
     useEffect(() => {
-        // Analytics Event
-        console.log("Analytics: surpriseme_opened");
+        if (isOpen) {
+             // Analytics Event
+            console.log("Analytics: surpriseme_opened");
 
-        // Fetch facts
-        fetch('/newbie_facts_v1.json')
-            .then(res => res.json())
-            .then(data => {
-                if (data && data.length > 0) {
-                    setFacts(data);
-                } else {
-                    handleNoFacts();
+            // Fetch facts
+            fetch('/newbie_facts_v1.json')
+                .then(res => res.json())
+                .then(data => {
+                    if (data && data.length > 0) {
+                        setFacts(data);
+                    } else {
+                        handleNoFacts();
+                    }
+                })
+                .catch(() => handleNoFacts());
+
+            // Load liked facts from local storage
+            try {
+                const storedLikes = localStorage.getItem(LOCAL_STORAGE_KEY);
+                if (storedLikes) {
+                    setLikedFacts(JSON.parse(storedLikes));
                 }
-            })
-            .catch(() => handleNoFacts());
-
-        // Load liked facts from local storage
-        try {
-            const storedLikes = localStorage.getItem(LOCAL_STORAGE_KEY);
-            if (storedLikes) {
-                setLikedFacts(JSON.parse(storedLikes));
+            } catch (error) {
+                console.error("Could not access local storage:", error);
+                setToast({ visible: true, message: 'Could not load saved facts.' });
             }
-        } catch (error) {
-            console.error("Could not access local storage:", error);
-            setToast({ visible: true, message: 'Could not load saved facts.' });
         }
-    }, []);
+    }, [isOpen]);
     
     const handleNoFacts = () => {
         setFacts([{ id: 'fallback', text: 'No facts available right now — check back later.', tags: [], source: 'System' }]);
@@ -80,10 +84,10 @@ const SurpriseMe: React.FC<SurpriseMeProps> = ({ isOpen, onClose }) => {
 
 
     useEffect(() => {
-        if (isOpen && facts.length > 0) {
+        if (isOpen && facts.length > 0 && !currentFact) {
             showRandomFact();
         }
-    }, [isOpen, facts]);
+    }, [isOpen, facts, currentFact, showRandomFact]);
 
 
     const handleLike = () => {
@@ -94,6 +98,9 @@ const SurpriseMe: React.FC<SurpriseMeProps> = ({ isOpen, onClose }) => {
             setTimeout(() => setToast({ visible: false, message: '' }), 1500);
             return;
         }
+
+        // Track the action for badge progress
+        trackAction('likeFact');
 
         const newLikedFacts = [...likedFacts, currentFact.id];
         setLikedFacts(newLikedFacts);
@@ -117,9 +124,9 @@ const SurpriseMe: React.FC<SurpriseMeProps> = ({ isOpen, onClose }) => {
     };
     
     const handleViewSaved = () => {
-        setShowSaved(true);
+        setShowSaved(!showSaved);
         // Analytics Event
-        console.log("Analytics: saved_facts_viewed");
+        console.log(`Analytics: saved_facts_${!showSaved ? 'viewed' : 'hidden'}`);
     }
 
     const getSavedFacts = () => {
@@ -157,7 +164,7 @@ const SurpriseMe: React.FC<SurpriseMeProps> = ({ isOpen, onClose }) => {
                         
                         <div className="flex justify-between items-center mb-4">
                              <h2 className="text-xl font-bold text-foreground">
-                                {showSaved ? 'Your Saved Facts' : 'Random fact'}
+                                {showSaved ? 'Your Saved Facts' : 'Random Fact'}
                             </h2>
                             <button onClick={onClose} aria-label="Close" className="p-2 text-muted-foreground hover:text-foreground transition-colors rounded-full">
                                 <X size={20} />
@@ -165,7 +172,7 @@ const SurpriseMe: React.FC<SurpriseMeProps> = ({ isOpen, onClose }) => {
                         </div>
 
                         {showSaved ? (
-                             <div className="h-64 overflow-y-auto space-y-2">
+                             <div className="h-64 overflow-y-auto space-y-2 pr-2">
                                 {getSavedFacts().length > 0 ? (
                                     getSavedFacts().map(fact => (
                                         <div key={fact.id} className="p-3 bg-muted/50 rounded-lg text-sm text-foreground">
@@ -173,7 +180,7 @@ const SurpriseMe: React.FC<SurpriseMeProps> = ({ isOpen, onClose }) => {
                                         </div>
                                     ))
                                 ) : (
-                                    <p className="text-muted-foreground text-center mt-8">No saved facts yet — press Surprise Me to find one!</p>
+                                    <p className="text-muted-foreground text-center mt-8">No saved facts yet — press the heart to save one!</p>
                                 )}
                             </div>
                         ) : (
@@ -187,7 +194,7 @@ const SurpriseMe: React.FC<SurpriseMeProps> = ({ isOpen, onClose }) => {
 
                         <div className="flex justify-between items-center mt-4">
                              <button onClick={handleViewSaved} className="text-sm font-semibold text-primary flex items-center gap-1">
-                                <Star size={16}/> Liked: {likedFacts.length}
+                                <Star size={16}/> Saved: {likedFacts.length}
                             </button>
                              <div className="flex gap-2">
                                 <button onClick={handleLike} aria-label="Like fact" className="p-3 bg-red-500/20 text-red-500 rounded-full hover:bg-red-500/30 transition-colors">

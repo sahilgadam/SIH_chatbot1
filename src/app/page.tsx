@@ -3,7 +3,7 @@
 
 import React, { useState, useEffect, useMemo } from "react";
 import { LatLngExpression } from "leaflet";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion"; // Corrected import
 import { SlidersHorizontal } from "lucide-react";
 
 import Header from "./components/ui/Header";
@@ -22,11 +22,13 @@ import NewbieDiagram from "./components/tabs/newbie/NewbieDiagram";
 import NewBieAbout from "./components/tabs/newbie/NewBieAbout";
 import { chatFloats } from "./services/mockDataService";
 import Badges from "./components/tabs/newbie/Badges";
+import QuizModal from "./components/tabs/newbie/QuizModal";
+import BadgeToast from "./components/ui/BadgeToast"; // Import the toast component
 
 export default function Page() {
   const [theme, setTheme] = useState<"light" | "dark">("dark");
-  const [mode, setMode] = useState<Mode>("researcher");
-  const [activeTab, setActiveTab] = useState<Tab>("visualize");
+  const [mode, setMode] = useState<Mode>("newbie"); // Default to newbie mode
+  const [activeTab, setActiveTab] = useState<Tab>("chat"); // Default to chat tab
   const [messages, setMessages] = useState<any[]>([]);
   
   const allFloats = useMemo(() => generateMockFloats(75), []);
@@ -50,22 +52,36 @@ export default function Page() {
     month: "",
   });
   const [isChatting, setIsChatting] = useState(false);
-  const [isQuickQsOpen, setIsQuickQsOpen] = useState(false); // State for QuickQs panel
+  const [isQuickQsOpen, setIsQuickQsOpen] = useState(false);
   const [showWaveAnimation, setShowWaveAnimation] = useState(false);
   const [isTuneModalOpen, setIsTuneModalOpen] = useState(false);
   const [isSurpriseMeOpen, setIsSurpriseMeOpen] = useState(false);
   const [showTuningAnimation, setShowTuningAnimation] = useState(false);
+  const [isQuizOpen, setIsQuizOpen] = useState(false);
+  const [unlockedBadge, setUnlockedBadge] = useState(null); // State for toast
 
   useEffect(() => {
     document.documentElement.classList.toggle("dark", theme === "dark");
   }, [theme]);
 
-  // **UPDATED BLUR EFFECT LOGIC**
+  // Listener for badge unlock events
+  useEffect(() => {
+    const handleBadgeUnlock = (event) => {
+        setUnlockedBadge(event.detail);
+        setTimeout(() => {
+            setUnlockedBadge(null);
+        }, 5000); // Hide toast after 5 seconds
+    };
+    window.addEventListener('badgeUnlocked', handleBadgeUnlock);
+    return () => {
+        window.removeEventListener('badgeUnlocked', handleBadgeUnlock);
+    };
+  }, []);
+
   useEffect(() => {
     const bg = document.getElementById("bg-canvas");
     if (!bg) return;
     const blurTabs = ["visualize", "compare", "insights"];
-    // Blur if on a blur-tab, OR if in chat and either chatting or quick-qs panel is open
     if (blurTabs.includes(activeTab) || (activeTab === "chat" && (isChatting || isQuickQsOpen))) {
       bg.style.filter = "blur(12px) brightness(0.8)";
     } else {
@@ -90,18 +106,18 @@ export default function Page() {
     setActiveTab("chat");
     setMessages([]);
     setIsChatting(false);
-    setIsQuickQsOpen(false); // Reset on mode toggle
+    setIsQuickQsOpen(false);
   };
 
   const handleTabChange = (tab: Tab) => {
     setActiveTab(tab);
-    setIsQuickQsOpen(false); // Reset on tab change
+    setIsQuickQsOpen(false);
   };
 
   const handleNewChat = () => {
     setMessages([]);
     setIsChatting(false);
-    setIsQuickQsOpen(false); // Reset on new chat
+    setIsQuickQsOpen(false);
   };
 
   const handleFloatSelect = (float: any) => {
@@ -124,6 +140,17 @@ export default function Page() {
       const { name, value } = e.target;
       setFilters((prev) => ({ ...prev, [name]: value }));
     }
+  };
+  
+  const handleAskFloatChat = (question: string, answer: string) => {
+    setIsQuizOpen(false);
+    setActiveTab('chat');
+    setIsChatting(true);
+    setMessages(prev => [
+        ...prev,
+        { id: Date.now(), who: 'user', text: question },
+        { id: Date.now() + 1, who: 'ai', text: answer }
+    ]);
   };
 
   const handleApplyFilters = () => {
@@ -178,90 +205,23 @@ export default function Page() {
   const renderDashboard = () => {
     if (mode === "researcher") {
       switch (activeTab) {
-        case "chat":
-          return (
-            <ChatTab
-              messages={messages}
-              setMessages={setMessages}
-              theme={theme}
-              handleNewChat={handleNewChat}
-              setIsChatting={setIsChatting}
-              filters={filters}
-              setFilters={setFilters}
-            />
-          );
-        // ... other researcher cases
-        case "visualize":
-          return (
-            <VisualizeTab
-              floats={filteredFloats}
-              filters={filters}
-              setFilters={setFilters}
-              handleApplyFilters={handleApplyFilters}
-              mapCenter={mapCenter}
-              mapZoom={mapZoom}
-              selectedFloat={selectedFloat}
-              regionSummary={regionSummary}
-              onFloatSelect={handleFloatSelect}
-              onDetailClose={handleDetailClose}
-              theme={theme}
-              mapTransition={mapTransition}
-            />
-          );
-        case "compare":
-          return <CompareTab theme={theme} />;
-        case "insights":
-          return <InsightsTab theme={theme} />;
-        case "about":
-          return <AboutTab />;
-        default:
-          return null;
+        case "chat": return <ChatTab messages={messages} setMessages={setMessages} theme={theme} handleNewChat={handleNewChat} setIsChatting={setIsChatting} filters={filters} setFilters={setFilters} />;
+        case "visualize": return <VisualizeTab floats={filteredFloats} filters={filters} setFilters={setFilters} handleApplyFilters={handleApplyFilters} mapCenter={mapCenter} mapZoom={mapZoom} selectedFloat={selectedFloat} regionSummary={regionSummary} onFloatSelect={handleFloatSelect} onDetailClose={handleDetailClose} theme={theme} mapTransition={mapTransition} />;
+        case "compare": return <CompareTab theme={theme} />;
+        case "insights": return <InsightsTab theme={theme} />;
+        case "about": return <AboutTab />;
+        default: return null;
       }
     }
 
-    // Newbie mode
     switch (activeTab) {
-      case "chat":
-        return (
-          <NewbieHelper
-            messages={messages}
-            setMessages={setMessages}
-            theme={theme}
-            handleNewChat={handleNewChat}
-            setIsChatting={setIsChatting}
-            onSurpriseMe={() => setIsSurpriseMeOpen(true)}
-            showQuickQs={isQuickQsOpen} // Pass state down
-            setShowQuickQs={setIsQuickQsOpen} // Pass setter down
-          />
-        );
-        // ... other newbie cases
-      case "visualize":
-        return (
-          <NewbieDiagram
-            floats={filteredFloats}
-            filters={filters}
-            handleFilterChange={handleFilterChange}
-            handleApplyFilters={handleApplyFilters}
-            mapCenter={mapCenter}
-            mapZoom={mapZoom}
-            selectedFloat={selectedFloat}
-            regionSummary={regionSummary}
-            onFloatSelect={handleFloatSelect}
-            onDetailClose={handleDetailClose}
-            theme={theme}
-            mapTransition={mapTransition}
-          />
-        );
-      case "compare":
-        return <CompareTab theme={theme} />;
-      case "insights":
-        return <InsightsTab theme={theme} />;
-      case "about":
-        return <NewBieAbout />;
-      case "badges":
-        return <Badges />;
-      default:
-        return null;
+      case "chat": return <NewbieHelper messages={messages} setMessages={setMessages} theme={theme} handleNewChat={handleNewChat} setIsChatting={setIsChatting} onSurpriseMe={() => setIsSurpriseMeOpen(true)} showQuickQs={isQuickQsOpen} setShowQuickQs={setIsQuickQsOpen} />;
+      case "visualize": return <NewbieDiagram floats={filteredFloats} filters={filters} handleFilterChange={handleFilterChange} handleApplyFilters={handleApplyFilters} mapCenter={mapCenter} mapZoom={mapZoom} selectedFloat={selectedFloat} regionSummary={regionSummary} onFloatSelect={handleFloatSelect} onDetailClose={handleDetailClose} theme={theme} mapTransition={mapTransition} />;
+      case "compare": return <CompareTab theme={theme} />;
+      case "insights": return <InsightsTab theme={theme} />;
+      case "about": return <NewBieAbout />;
+      case "badges": return <Badges onTakeQuiz={() => setIsQuizOpen(true)} />;
+      default: return null;
     }
   };
 
@@ -273,7 +233,7 @@ export default function Page() {
         theme={theme}
         setTheme={setTheme}
         activeTab={activeTab}
-        setActiveTab={handleTabChange} // Use the new handler
+        setActiveTab={handleTabChange}
         mode={mode}
         onModeToggle={handleModeToggle}
         isSidebarOpen={isSidebarOpen}
@@ -281,32 +241,19 @@ export default function Page() {
       />
       {showWaveAnimation && <WaveAnimation />}
 
-      <TuneModal
-        isOpen={isTuneModalOpen}
-        onClose={() => setIsTuneModalOpen(false)}
-        filters={filters}
-        setFilters={setFilters}
-        onApply={handleApplyFilters}
-      />
-      
-      <SurpriseMe 
-        isOpen={isSurpriseMeOpen} 
-        onClose={() => setIsSurpriseMeOpen(false)} 
-      />
+      <TuneModal isOpen={isTuneModalOpen} onClose={() => setIsTuneModalOpen(false)} filters={filters} setFilters={setFilters} onApply={handleApplyFilters} />
+      <SurpriseMe isOpen={isSurpriseMeOpen} onClose={() => setIsSurpriseMeOpen(false)} />
+      <QuizModal isOpen={isQuizOpen} onClose={() => setIsQuizOpen(false)} onAskFloatChat={handleAskFloatChat} />
 
-      <main
-        className={`flex-1 p-4 sm:p-6 md:p-8 relative transition-all duration-300 ${
-          isSidebarOpen ? "md:ml-64" : "md:ml-20"
-        }`}
-      >
+      <AnimatePresence>
+        {unlockedBadge && <BadgeToast badge={unlockedBadge} onDismiss={() => setUnlockedBadge(null)} />}
+      </AnimatePresence>
+
+      <main className={`flex-1 p-4 sm:p-6 md:p-8 relative transition-all duration-300 ${isSidebarOpen ? "md:ml-64" : "md:ml-20"}`}>
         <div className="absolute top-6 right-6 z-20">
           <motion.button
             onClick={() => setIsTuneModalOpen(true)}
-            className={`p-3 rounded-full transition-all duration-300 shadow-lg ${
-              isTuningActive
-                ? "bg-primary text-primary-foreground"
-                : "bg-card text-foreground"
-            }`}
+            className={`p-3 rounded-full transition-all duration-300 shadow-lg ${isTuningActive ? "bg-primary text-primary-foreground" : "bg-card text-foreground"}`}
             whileHover={{ scale: 1.1, rotate: 5 }}
             whileTap={{ scale: 0.9 }}
             title="Tune Data Context"
@@ -319,15 +266,10 @@ export default function Page() {
               initial={{ opacity: 1, scale: 0 }}
               animate={{ opacity: 0, scale: 2 }}
               transition={{ duration: 1.5, ease: "easeOut" }}
-              style={{
-                borderRadius: "50%",
-                border: "2px solid var(--primary)",
-                transform: "translate(-50%, -50%)",
-              }}
+              style={{ borderRadius: "50%", border: "2px solid var(--primary)", transform: "translate(-50%, -50%)" }}
             />
           )}
         </div>
-
         <div className="flex h-full">
           <section className="flex-1 h-full">{renderDashboard()}</section>
         </div>

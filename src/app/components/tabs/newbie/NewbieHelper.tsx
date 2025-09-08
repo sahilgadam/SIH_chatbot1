@@ -1,9 +1,11 @@
+// src/app/components/tabs/newbie/NewbieHelper.tsx
 "use client";
 
 import React, { useState, useRef, useEffect, FC } from 'react';
 import { Send, User, SquarePlus, ChevronDown, Dices, ArrowLeft, Plus } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import NewbieGreeting from '../../chat/NewbieGreeting';
+import { trackAction } from '@/app/services/badgeService'; // Import the service
 
 const NavIcon: FC = () => (
     <div className="bg-primary text-primary-foreground rounded-full w-8 h-8 flex items-center justify-center text-lg font-bold shadow-md">
@@ -22,7 +24,7 @@ interface QuickQ {
 
 const oceanBasicsQs: QuickQ[] = [
     { id: 'basics-q1', title: 'Why is the deep sea so cold?', preview: 'Surface vs. deep temperature.', full_answer: 'Sunlight only heats the surface waters. The deep ocean, which sunlight can\'t reach, gets its water from cold, dense currents sinking near the poles, keeping it just a few degrees above freezing.', tags: ['temperature'], emoji: '🌡️' },
-    { id: 'basics-q2', title: 'What is a thermocline?', preview: 'A layer of rapid temperature change.', full_answer: 'A thermocline is a thin layer in the ocean where the temperature changes very quickly with depth. It acts as a barrier between the warm surface water and the cold deep water.', tags: ['temperature'], emoji: '🌡️' },
+    { id: 'basics-q2', title: 'What is a thermocline?', preview: 'A layer of rapid temperature change.', full_answer: 'A thermocline is a thin layer in the ocean where the temperature changes very quickly with depth. It acts as a barrier between the warm surface water and the cold deep water below.', tags: ['temperature'], emoji: '🌡️' },
     { id: 'basics-q3', title: 'Why does salinity matter for currents?', preview: 'How saltiness drives ocean movement.', full_answer: 'Salty water is denser than fresh water. When cold, salty water becomes very dense, it sinks and pushes deep water around, driving the massive "global conveyor belt" currents.', tags: ['salinity'], emoji: '🧂' },
     { id: 'basics-q4', title: 'How does pressure change with depth?', preview: 'The immense pressure of the deep.', full_answer: 'Pressure increases by about 1 atmosphere (the pressure we feel at sea level) for every 10 meters you go down. In the deepest trenches, the pressure is over 1,000 times what it is at the surface!', tags: ['pressure'], emoji: '💥' },
     { id: 'basics-q5', title: 'How long is the global ocean journey?', preview: 'The "global conveyor belt" timeline.', full_answer: 'A single drop of water traveling on the deep ocean conveyor belt can take about 1,000 years to complete its journey around the world.', tags: ['currents'], emoji: '🌍' },
@@ -67,7 +69,10 @@ export default function NewbieHelper({ messages, setMessages, theme, handleNewCh
         const userInput = inputMessage.trim();
         const lowerCaseInput = userInput.toLowerCase();
 
-        if (messages.length === 0) setIsChatting(true); 
+        if (messages.length === 0) {
+            setIsChatting(true);
+            trackAction('sendMessage'); // Track first message for badge
+        }
 
         setMessages((prev) => [...prev, { id: Date.now() + 1, who: 'user', text: userInput }]);
         setInputMessage("");
@@ -103,6 +108,8 @@ export default function NewbieHelper({ messages, setMessages, theme, handleNewCh
 
         if (messages.length === 0) setIsChatting(true);
         
+        trackAction('clickQuickQ'); // Track for badge progress
+
         setMessages(prev => [...prev, { id: Date.now() + 1, who: 'user', text: q.title }]);
         console.log(`Analytics Event: quickq_clicked, id: "${q.id}", title: "${q.title}", auto_sent: true`);
 
@@ -153,7 +160,6 @@ export default function NewbieHelper({ messages, setMessages, theme, handleNewCh
                         </div>
                     </div>
                     
-                    {/* **FIXED**: Removed the conditional blur from this div */}
                     <div className={`flex-1 space-y-6 overflow-y-auto pr-2 mb-4 transition-all duration-300`}>
                         {messages.length === 0 ? <NewbieGreeting /> : messages.map((m) => (
                             <div key={m.id} className={`flex items-start gap-3 ${m.who === 'user' ? 'justify-end' : 'justify-start'}`}>

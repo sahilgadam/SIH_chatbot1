@@ -2,7 +2,7 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import { Award, Lock, MessageSquare, Zap, Heart, Brain, Anchor, Moon } from 'lucide-react';
+import { Award, Lock, MessageSquare, Zap, Heart, Brain, Anchor, Moon, BookOpen } from 'lucide-react';
 
 // Map badge IDs to Lucide React icons
 const badgeIcons = {
@@ -14,7 +14,7 @@ const badgeIcons = {
     secret_aurora: Moon
 };
 
-const Badges = () => {
+const Badges = ({ onTakeQuiz }) => {
     const [badges, setBadges] = useState([]);
     const [unlockedBadgeIds, setUnlockedBadgeIds] = useState([]);
 
@@ -54,7 +54,7 @@ const Badges = () => {
 
     return (
         <div className="p-6">
-            <h2 className="text-3xl font-bold mb-6 text-foreground">Your Badges</h2>
+            <h2 className="text-3xl font-bold mb-6 text-foreground">Quiz & Kudos</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                 {badges.map(badge => {
                     const isUnlocked = unlockedBadgeIds.includes(badge.id);
@@ -78,6 +78,23 @@ const Badges = () => {
                         </div>
                     );
                 })}
+            </div>
+             <div className="mt-8">
+                <div className="bg-card rounded-xl p-4 border border-border shadow-lg">
+                    <div className="flex items-center justify-between">
+                        <div>
+                            <h3 className="text-base font-semibold text-foreground">Quick Quiz</h3>
+                            <p className="text-sm text-muted-foreground">Test your ocean smarts</p>
+                        </div>
+                        <button onClick={onTakeQuiz} className="px-4 py-2 bg-primary text-primary-foreground font-semibold rounded-lg shadow-lg hover:bg-primary/90 transition-all">Take Quiz ►</button>
+                    </div>
+                    <div className="mt-4">
+                        <p className="text-xs text-muted-foreground">Quiz badges: 0/3 unlocked</p>
+                        <div className="w-full bg-muted rounded-full h-1.5 mt-1">
+                            <div className="bg-primary h-1.5 rounded-full" style={{ width: '0%' }}></div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     );

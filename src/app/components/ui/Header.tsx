@@ -1,9 +1,10 @@
+// src/app/components/ui/Header.tsx
 "use client";
 
 import React from "react";
 import type { FC } from "react";
 // Remove Dices from this import
-import { Sun, Moon, MessageSquare, BarChart2, GitCompare, Zap, Info, User, GraduationCap, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Sun, Moon, MessageSquare, BarChart2, GitCompare, Zap, Info, User, GraduationCap, ChevronLeft, ChevronRight, BookOpen } from 'lucide-react';
 import { RESEARCHER_TABS, NEWBIE_TABS, Tab, Mode } from "../../types";
 
 interface HeaderProps {

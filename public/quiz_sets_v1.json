@@ -1,0 +1,432 @@
+[
+    {
+      "set_id": "set_01",
+      "title": "Ocean Basics",
+      "questions": [
+        {
+          "id": "q_0001",
+          "set_id": "set_01",
+          "question": "What happens to seawater density when salinity increases?",
+          "options": [
+            "It decreases",
+            "It increases",
+            "It stays the same",
+            "It evaporates"
+          ],
+          "correct_index": 1,
+          "explanation": "Higher salinity means more dissolved salts, which increases the mass of the water in the same volume, making it denser. This is a key driver of ocean circulation.",
+          "hint": "Think about whether adding salt to water makes it heavier or lighter.",
+          "tags": ["salinity", "density", "ocean"],
+          "difficulty": "easy"
+        },
+        {
+          "id": "q_0002",
+          "set_id": "set_01",
+          "question": "What is the primary mission of the Argo program?",
+          "options": [
+            "To map the ocean floor",
+            "To study marine life",
+            "To collect data on ocean temperature and salinity",
+            "To monitor shipping lanes"
+          ],
+          "correct_index": 2,
+          "explanation": "The Argo program deploys a fleet of robotic floats around the world to measure temperature and salinity throughout the upper part of the ocean.",
+          "hint": "Argo floats are like weather balloons for the ocean.",
+          "tags": ["argo", "temperature", "salinity"],
+          "difficulty": "easy"
+        },
+        {
+          "id": "q_0003",
+          "set_id": "set_01",
+          "question": "What is a thermocline?",
+          "options": [
+            "A deep-sea current",
+            "A layer of rapid temperature change with depth",
+            "A type of underwater volcano",
+            "A migration path for whales"
+          ],
+          "correct_index": 1,
+          "explanation": "The thermocline is the transition layer between the warmer mixed water at the surface and the cooler deep water below.",
+          "hint": "The name gives you a clue: 'thermo' for heat and 'cline' for slope or gradient.",
+          "tags": ["temperature", "oceanography"],
+          "difficulty": "medium"
+        },
+        {
+          "id": "q_0004",
+          "set_id": "set_01",
+          "question": "What does PSU stand for in oceanography?",
+          "options": [
+            "Practical Salinity Unit",
+            "Pressure Scale Unit",
+            "Pacific Sea Union",
+            "Photosynthetic Usable Unit"
+          ],
+          "correct_index": 0,
+          "explanation": "PSU, or Practical Salinity Unit, is a measure of the salt content of seawater. The average ocean salinity is about 35 PSU.",
+          "hint": "It's a standard way to measure how salty the water is.",
+          "tags": ["salinity", "measurements"],
+          "difficulty": "medium"
+        },
+        {
+          "id": "q_0005",
+          "set_id": "set_01",
+          "question": "How do Argo floats transmit their data?",
+          "options": [
+            "Through underwater cables",
+            "By returning to shore",
+            "Via satellite communication when they surface",
+            "Using sonar signals"
+          ],
+          "correct_index": 2,
+          "explanation": "Argo floats surface every 10 days to transmit the data they've collected to satellites, which then relay the information to scientists.",
+          "hint": "The floats need to 'phone home' from the surface of the ocean.",
+          "tags": ["argo", "data"],
+          "difficulty": "easy"
+        }
+      ]
+    },
+    {
+      "set_id": "set_02",
+      "title": "Ocean Circulation",
+      "questions": [
+        {
+          "id": "q_0006",
+          "set_id": "set_02",
+          "question": "What is the 'global conveyor belt' in the ocean?",
+          "options": [
+            "A system for transporting goods across the ocean",
+            "A network of underwater tunnels",
+            "A constantly moving system of deep-ocean circulation driven by temperature and salinity",
+            "A series of high-speed surface currents"
+          ],
+          "correct_index": 2,
+          "explanation": "The global conveyor belt is a large-scale ocean circulation that is driven by differences in temperature and salinity, which affect water density.",
+          "hint": "It's a slow but powerful process that moves water around the globe.",
+          "tags": ["currents", "thermohaline"],
+          "difficulty": "medium"
+        },
+        {
+          "id": "q_0007",
+          "set_id": "set_02",
+          "question": "What is the Coriolis effect?",
+          "options": [
+            "The effect of the moon's gravity on the tides",
+            "The way the Earth's rotation deflects moving objects (like currents)",
+            "The process of water evaporating from the ocean",
+            "The reflection of sound waves off the ocean floor"
+          ],
+          "correct_index": 1,
+          "explanation": "The Coriolis effect is a force that results from the Earth's rotation, deflecting moving objects (like wind and water currents) to the right in the Northern Hemisphere and to the left in the Southern Hemisphere.",
+          "hint": "It's why hurricanes spin in different directions in the Northern and Southern Hemispheres.",
+          "tags": ["currents", "physics"],
+          "difficulty": "hard"
+        },
+        {
+          "id": "q_0008",
+          "set_id": "set_02",
+          "question": "What is an ocean gyre?",
+          "options": [
+            "A type of deep-sea fish",
+            "A large system of circulating ocean currents, particularly those involved with large wind movements",
+            "An underwater mountain range",
+            "A type of seaweed"
+          ],
+          "correct_index": 1,
+          "explanation": "Ocean gyres are large systems of circular ocean currents formed by global wind patterns and forces created by Earth's rotation.",
+          "hint": "The Great Pacific Garbage Patch is located in one of these.",
+          "tags": ["currents", "geography"],
+          "difficulty": "medium"
+        },
+        {
+          "id": "q_0009",
+          "set_id": "set_02",
+          "question": "What is upwelling?",
+          "options": [
+            "The process of waves breaking on the shore",
+            "The movement of warm surface water to the deep ocean",
+            "The process in which deep, cold water rises toward the surface",
+            "The formation of sea ice in polar regions"
+          ],
+          "correct_index": 2,
+          "explanation": "Upwelling is a process in which deep, cold, nutrient-rich water rises toward the surface. This often results in high levels of primary productivity and fish production.",
+          "hint": "It brings nutrients from the deep sea to the surface.",
+          "tags": ["currents", "biology"],
+          "difficulty": "medium"
+        },
+        {
+          "id": "q_0010",
+          "set_id": "set_02",
+          "question": "What is the main driver of surface ocean currents?",
+          "options": [
+            "The moon's gravity",
+            "Underwater earthquakes",
+            "Wind",
+            "The Earth's magnetic field"
+          ],
+          "correct_index": 2,
+          "explanation": "Surface ocean currents are primarily driven by the wind. The sun heats the atmosphere, creating wind, and this wind then pushes the surface of the ocean, creating currents.",
+          "hint": "It's the same thing that powers sailboats.",
+          "tags": ["currents", "physics"],
+          "difficulty": "easy"
+        }
+      ]
+    },
+    {
+      "set_id": "set_03",
+      "title": "Ocean and Climate",
+      "questions": [
+        {
+          "id": "q_0011",
+          "set_id": "set_03",
+          "question": "How does the ocean influence climate?",
+          "options": [
+            "By absorbing and transporting heat, and by exchanging gases with the atmosphere",
+            "By creating underwater earthquakes",
+            "By reflecting all sunlight back into space",
+            "By creating clouds that block the sun"
+          ],
+          "correct_index": 0,
+          "explanation": "The ocean plays a crucial role in regulating climate by absorbing, storing, and transporting heat, carbon, and water. It also exchanges gases, such as carbon dioxide, with the atmosphere.",
+          "hint": "The ocean is like a giant, slow-moving climate control system for the planet.",
+          "tags": ["climate", "oceanography"],
+          "difficulty": "medium"
+        },
+        {
+          "id": "q_0012",
+          "set_id": "set_03",
+          "question": "What is El Niño?",
+          "options": [
+            "A type of tropical storm",
+            "A large underwater volcano",
+            "A climate pattern that describes the unusual warming of surface waters in the eastern tropical Pacific Ocean",
+            "A deep-ocean current"
+          ],
+          "correct_index": 2,
+          "explanation": "El Niño is a climate pattern characterized by the unusual warming of surface waters in the eastern tropical Pacific Ocean. It can have significant impacts on weather patterns worldwide.",
+          "hint": "It's a major climate event that starts in the Pacific Ocean but affects the whole world.",
+          "tags": ["climate", "pacific"],
+          "difficulty": "medium"
+        },
+        {
+          "id": "q_0013",
+          "set_id": "set_03",
+          "question": "How does the melting of sea ice affect the ocean?",
+          "options": [
+            "It makes the ocean saltier",
+            "It has no effect on the ocean",
+            "It adds fresh water to the ocean, which can affect currents and sea level",
+            "It makes the ocean colder"
+          ],
+          "correct_index": 2,
+          "explanation": "The melting of sea ice adds fresh water to the ocean, which is less dense than saltwater. This can disrupt ocean circulation patterns and contribute to sea-level rise.",
+          "hint": "Think about what happens when you add ice cubes to a glass of salty water.",
+          "tags": ["climate", "salinity", "polar"],
+          "difficulty": "easy"
+        },
+        {
+          "id": "q_0014",
+          "set_id": "set_03",
+          "question": "What is ocean acidification?",
+          "options": [
+            "The process of the ocean becoming more acidic due to the absorption of carbon dioxide from the atmosphere",
+            "The process of the ocean becoming saltier",
+            "The process of the ocean becoming warmer",
+            "The process of the ocean becoming cleaner"
+          ],
+          "correct_index": 0,
+          "explanation": "Ocean acidification is the ongoing decrease in the pH of the Earth's oceans, caused by the uptake of carbon dioxide (CO2) from the atmosphere. This can have harmful effects on marine life, especially organisms with shells or skeletons.",
+          "hint": "It's the other CO2 problem.",
+          "tags": ["climate", "chemistry", "biology"],
+          "difficulty": "hard"
+        },
+        {
+          "id": "q_0015",
+          "set_id": "set_03",
+          "question": "How do Argo floats help us understand climate change?",
+          "options": [
+            "By measuring the amount of plastic in the ocean",
+            "By providing long-term, global data on ocean temperature and salinity, which are key indicators of climate change",
+            "By counting the number of fish in the ocean",
+            "By mapping the ocean floor"
+          ],
+          "correct_index": 1,
+          "explanation": "Argo floats provide a continuous and widespread stream of data on ocean heat and freshwater content, which are essential for understanding and monitoring climate change.",
+          "hint": "They provide the 'vital signs' of the ocean.",
+          "tags": ["argo", "climate", "data"],
+          "difficulty": "easy"
+        }
+      ]
+    },
+    {
+      "set_id": "set_04",
+      "title": "Ocean Geography",
+      "questions": [
+        {
+          "id": "q_0016",
+          "set_id": "set_04",
+          "question": "Which is the largest ocean in the world?",
+          "options": [
+            "The Atlantic Ocean",
+            "The Indian Ocean",
+            "The Pacific Ocean",
+            "The Arctic Ocean"
+          ],
+          "correct_index": 2,
+          "explanation": "The Pacific Ocean is the largest and deepest of the world's five oceans, covering about a third of the surface of the Earth.",
+          "hint": "It's the ocean between Asia and the Americas.",
+          "tags": ["geography", "pacific"],
+          "difficulty": "easy"
+        },
+        {
+          "id": "q_0017",
+          "set_id": "set_04",
+          "question": "What is the deepest part of the ocean?",
+          "options": [
+            "The Mariana Trench",
+            "The Puerto Rico Trench",
+            "The Java Trench",
+            "The South Sandwich Trench"
+          ],
+          "correct_index": 0,
+          "explanation": "The Mariana Trench, in the western Pacific Ocean, is the deepest oceanic trench on Earth. The deepest point, the Challenger Deep, is nearly 11,000 meters (36,000 feet) deep.",
+          "hint": "It's located in the western Pacific, near Guam.",
+          "tags": ["geography", "deep-sea"],
+          "difficulty": "medium"
+        },
+        {
+          "id": "q_0018",
+          "set_id": "set_04",
+          "question": "What is the Mid-Ocean Ridge?",
+          "options": [
+            "A shallow area in the middle of the ocean",
+            "A long, seismically active submarine ridge system situated in the middle of an ocean basin",
+            "A deep trench in the ocean floor",
+            "A chain of volcanic islands"
+          ],
+          "correct_index": 1,
+          "explanation": "The Mid-Ocean Ridge is a continuous range of undersea volcanic mountains that winds its way around the globe, and it's the site of seafloor spreading.",
+          "hint": "It's the longest mountain range in the world, and it's underwater.",
+          "tags": ["geography", "geology"],
+          "difficulty": "medium"
+        },
+        {
+          "id": "q_0019",
+          "set_id": "set_04",
+          "question": "What is a continental shelf?",
+          "options": [
+            "A deep-ocean trench",
+            "An area of the seabed around a large landmass where the sea is relatively shallow compared with the open ocean",
+            "A large, flat area of the deep-ocean floor",
+            "A steep slope that separates the continental shelf from the deep-ocean floor"
+          ],
+          "correct_index": 1,
+          "explanation": "The continental shelf is the extended perimeter of each continent and is where a significant amount of the world's fishing is done.",
+          "hint": "It's the shallow part of the ocean that's close to land.",
+          "tags": ["geography", "geology"],
+          "difficulty": "easy"
+        },
+        {
+          "id": "q_0020",
+          "set_id": "set_04",
+          "question": "What is the name of the ocean that surrounds Antarctica?",
+          "options": [
+            "The Atlantic Ocean",
+            "The Indian Ocean",
+            "The Pacific Ocean",
+            "The Southern Ocean"
+          ],
+          "correct_index": 3,
+          "explanation": "The Southern Ocean, also known as the Antarctic Ocean, is the body of water that encircles Antarctica. It's the fourth-largest of the five oceans.",
+          "hint": "It's the 'southernmost' ocean.",
+          "tags": ["geography", "antarctica"],
+          "difficulty": "easy"
+        }
+      ]
+    },
+    {
+      "set_id": "set_05",
+      "title": "Marine Biology",
+      "questions": [
+        {
+          "id": "q_0021",
+          "set_id": "set_05",
+          "question": "What is phytoplankton?",
+          "options": [
+            "A type of small fish",
+            "Microscopic marine algae",
+            "A type of deep-sea coral",
+            "A type of jellyfish"
+          ],
+          "correct_index": 1,
+          "explanation": "Phytoplankton are microscopic marine algae. They are the foundation of the marine food web and play a crucial role in the Earth's carbon cycle.",
+          "hint": "They are the 'plants' of the ocean.",
+          "tags": ["biology", "plankton"],
+          "difficulty": "easy"
+        },
+        {
+          "id": "q_0022",
+          "set_id": "set_05",
+          "question": "What is bioluminescence?",
+          "options": [
+            "The production and emission of light by a living organism",
+            "A type of underwater sonar",
+            "The process of photosynthesis in the ocean",
+            "The movement of water in the ocean"
+          ],
+          "correct_index": 0,
+          "explanation": "Bioluminescence is the production and emission of light by a living organism. It's common in marine life, especially in the deep sea.",
+          "hint": "Think of fireflies, but in the ocean.",
+          "tags": ["biology", "deep-sea"],
+          "difficulty": "medium"
+        },
+        {
+          "id": "q_0023",
+          "set_id": "set_05",
+          "question": "What is a coral reef?",
+          "options": [
+            "A type of underwater plant",
+            "A large rock formation on the ocean floor",
+            "An underwater ecosystem characterized by reef-building corals",
+            "A type of seaweed"
+          ],
+          "correct_index": 2,
+          "explanation": "Coral reefs are diverse underwater ecosystems held together by calcium carbonate structures secreted by corals. They are often called the 'rainforests of the sea'.",
+          "hint": "They are colorful, underwater structures that are home to many fish.",
+          "tags": ["biology", "coral"],
+          "difficulty": "easy"
+        },
+        {
+          "id": "q_0024",
+          "set_id": "set_05",
+          "question": "What is a hydrothermal vent?",
+          "options": [
+            "A type of underwater volcano",
+            "A fissure on the seafloor from which geothermally heated water issues",
+            "A deep-ocean trench",
+            "A type of ocean current"
+          ],
+          "correct_index": 1,
+          "explanation": "Hydrothermal vents are fissures on the seafloor from which geothermally heated water discharges. They are often found near volcanically active places, and they support unique ecosystems.",
+          "hint": "They are like geysers on the ocean floor.",
+          "tags": ["biology", "deep-sea", "geology"],
+          "difficulty": "hard"
+        },
+        {
+          "id": "q_0025",
+          "set_id": "set_05",
+          "question": "What is the largest animal on Earth?",
+          "options": [
+            "The African elephant",
+            "The blue whale",
+            "The colossal squid",
+            "The great white shark"
+          ],
+          "correct_index": 1,
+          "explanation": "The blue whale is the largest animal on Earth, both in terms of length and weight. It can reach up to 30 meters (98 feet) in length and weigh up to 190,000 kilograms (420,000 pounds).",
+          "hint": "It's a marine mammal.",
+          "tags": ["biology", "whales"],
+          "difficulty": "easy"
+        }
+      ]
+    }
+  ]
