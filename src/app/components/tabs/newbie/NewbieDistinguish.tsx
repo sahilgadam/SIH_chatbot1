@@ -1,9 +1,11 @@
 "use client";
 
 import React, { useEffect, useMemo, useState, useRef } from "react";
-// Removed Plotly import from the top level to prevent server-side rendering errors
+import dynamic from 'next/dynamic';
 
 import { Download, Printer, ChevronDown, AlertTriangle, Info, CheckCircle } from 'lucide-react';
+
+const Plotly = dynamic(() => import('react-plotly.js'), { ssr: false });
 
 type PreviewMetric = 'Temperature' | 'Salinity' | 'Humidity';
 const usePreviewMetric = () => {
@@ -124,6 +126,44 @@ const getUnit = (type: DataType) => {
         default: return '';
     }
 }
+
+const getDescriptiveType = (originalType: string, currentDataType: DataType): string => {
+    switch(currentDataType) {
+        case 'Temperature':
+            if (originalType === 'Warm Core' || originalType === 'Warm') return 'Warm Core';
+            if (originalType === 'Cold Front' || originalType === 'Cool Patch' || originalType === 'Cold Core' || originalType === 'Cold Surface') return 'Cold Front';
+            return originalType;
+        case 'Salinity':
+            if (originalType === 'Warm Core' || originalType === 'Warm' || originalType === 'Mixed') return 'High Salinity';
+            if (originalType === 'Cold Front' || originalType === 'Cool Patch' || originalType === 'Upwelling' || originalType === 'Cold Core' || originalType === 'Cold Surface') return 'Low Salinity';
+            return originalType;
+        case 'Humidity':
+            if (originalType === 'Warm Core' || originalType === 'Warm') return 'Low Humidity';
+            if (originalType === 'Cold Front' || originalType === 'Cool Patch' || originalType === 'Upwelling' || originalType === 'Cold Core' || originalType === 'Cold Surface' || originalType === 'Mixed') return 'High Humidity';
+            return originalType;
+        default:
+            return originalType;
+    }
+};
+
+const getDescriptiveEmoji = (originalType: string, currentDataType: DataType): string => {
+    switch(currentDataType) {
+        case 'Temperature':
+            if (originalType === 'Warm Core' || originalType === 'Warm') return '🔥';
+            if (originalType === 'Cold Front' || originalType === 'Cool Patch' || originalType === 'Cold Core' || originalType === 'Cold Surface') return '❄';
+            return '🌊';
+        case 'Salinity':
+            if (originalType === 'Warm Core' || originalType === 'Warm' || originalType === 'Mixed') return '🧂';
+            if (originalType === 'Cold Front' || originalType === 'Cool Patch' || originalType === 'Upwelling' || originalType === 'Cold Core' || originalType === 'Cold Surface') return '💧';
+            return '🌊';
+        case 'Humidity':
+            if (originalType === 'Warm Core' || originalType === 'Warm') return '🏜';
+            if (originalType === 'Cold Front' || originalType === 'Cool Patch' || originalType === 'Upwelling' || originalType === 'Cold Core' || originalType === 'Cold Surface' || originalType === 'Mixed') return '💧';
+            return '🌊';
+        default:
+            return '';
+    }
+};
 
 const KeyTakeawaysPanel = ({ stats, visibleIds, dataType }: { stats: any[]; visibleIds: string[]; dataType: DataType; }) => {
     const visibleStats = stats.filter(s => visibleIds.includes(s.id));
@@ -278,7 +318,18 @@ const componentStyles = `
     .animate-fade-in-scale {
         animation: fade-in-scale 0.2s ease-out forwards;
     }
-
+    .chart-container {
+        background: linear-gradient(165deg, hsl(222 47% 14% / 1), hsl(222 47% 11% / 1));
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05), inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .dark .chart-container {
+        background: linear-gradient(165deg, hsl(222 47% 9% / 1), hsl(222 47% 6% / 1)),
+                        radial-gradient(ellipse at top left, hsl(var(--primary) / 0.15), transparent 50%),
+                        radial-gradient(ellipse at bottom right, hsl(var(--primary) / 0.25), transparent 60%);
+        box-shadow: 0 20px 25px -5px rgba(0,0,0,0.3), 0 10px 10px -5px rgba(0,0,0,0.1), inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
+        border: 1px solid hsl(var(--border));
+    }
 `;
 
 
@@ -300,14 +351,8 @@ export default function ResearcherCompare({ theme = "light", floats: floatsProp,
     const [depthRange, setDepthRange] = useState<{ min: number; max: number }>({ min: Math.min(...depths), max: Math.max(...depths) });
     
     const [statusMessage, setStatusMessage] = useState('');
-    const [PlotComponent, setPlotComponent] = useState<any | null>(null);
 
     useEffect(() => {
-        // Dynamically import Plotly on the client side
-        import('react-plotly.js').then((module) => {
-            setPlotComponent(() => module.default);
-        });
-
         const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
         setPrefersReducedMotion(mediaQuery.matches);
         const handleChange = () => setPrefersReducedMotion(mediaQuery.matches);
@@ -394,6 +439,14 @@ export default function ResearcherCompare({ theme = "light", floats: floatsProp,
             const xData = f[dataKey] as number[];
             const x = filteredData.map(({ index }) => xData[index]);
             const y = filteredData.map(({ depth }) => depth);
+            
+            const descriptiveEmoji = getDescriptiveEmoji(f.id.match(/\((.*?)\)/)?.[1] || 'Standard', dataType);
+            const unit = getUnit(dataType);
+            
+            const hoverTexts = x.map((value, idx) => {
+                const depthVal = y[idx];
+                return `<b>${f.id.split(' ')[0]} ${descriptiveEmoji}</b><br>${dataType}: ${value.toFixed(1)} ${unit}<br>Depth: ${depthVal} m`;
+            });
 
             return {
               x,
@@ -401,7 +454,16 @@ export default function ResearcherCompare({ theme = "light", floats: floatsProp,
               name: f.id,
               mode: "lines+markers", 
               type: "scatter" as const,
-              hoverinfo: 'none', 
+              hoverinfo: 'text',
+              text: hoverTexts,
+              hovertemplate: '%{text}<extra></extra>',
+              // --- START: MODIFIED HOVERLABEL ---
+              hoverlabel: {
+                  bgcolor: f.color,
+                  bordercolor: f.color,
+                  font: { color: 'white' }
+              },
+              // --- END: MODIFIED HOVERLABEL ---
               marker: {
                 size: isHighlighted ? 11 : 8,
                 symbol: 'circle',
@@ -489,7 +551,9 @@ export default function ResearcherCompare({ theme = "light", floats: floatsProp,
         },
         showlegend: false,
         margin: { l: 70, r: 20, t: 70, b: 60 },
-        hovermode: "x unified",
+        // --- START: MODIFIED HOVER MODE ---
+        hovermode: "closest",
+        // --- END: MODIFIED HOVER MODE ---
         shapes: shapes,
         annotations: []
     };
@@ -549,43 +613,6 @@ export default function ResearcherCompare({ theme = "light", floats: floatsProp,
     };
     const toggleVisible = (id: string) => setVisibleIds(prev => prev.includes(id) ? prev.filter(p => p !== id) : [...prev, id]);
 
-    const getDescriptiveType = (originalType: string, currentDataType: DataType): string => {
-        switch(currentDataType) {
-            case 'Temperature':
-                if (originalType === 'Warm Core' || originalType === 'Warm') return 'Warm Core';
-                if (originalType === 'Cold Front' || originalType === 'Cool Patch' || originalType === 'Cold Core' || originalType === 'Cold Surface') return 'Cold Front';
-                return originalType;
-            case 'Salinity':
-                if (originalType === 'Warm Core' || originalType === 'Warm' || originalType === 'Mixed') return 'High Salinity';
-                if (originalType === 'Cold Front' || originalType === 'Cool Patch' || originalType === 'Upwelling' || originalType === 'Cold Core' || originalType === 'Cold Surface') return 'Low Salinity';
-                return originalType;
-            case 'Humidity':
-                if (originalType === 'Warm Core' || originalType === 'Warm') return 'Low Humidity';
-                if (originalType === 'Cold Front' || originalType === 'Cool Patch' || originalType === 'Upwelling' || originalType === 'Cold Core' || originalType === 'Cold Surface' || originalType === 'Mixed') return 'High Humidity';
-                return originalType;
-            default:
-                return originalType;
-        }
-    };
-
-    const getDescriptiveEmoji = (originalType: string, currentDataType: DataType): string => {
-        switch(currentDataType) {
-            case 'Temperature':
-                if (originalType === 'Warm Core' || originalType === 'Warm') return '🔥';
-                if (originalType === 'Cold Front' || originalType === 'Cool Patch' || originalType === 'Cold Core' || originalType === 'Cold Surface') return '❄';
-                return '🌊';
-            case 'Salinity':
-                if (originalType === 'Warm Core' || originalType === 'Warm' || originalType === 'Mixed') return '🧂';
-                if (originalType === 'Cold Front' || originalType === 'Cool Patch' || originalType === 'Upwelling' || originalType === 'Cold Core' || originalType === 'Cold Surface') return '💧';
-                return '🌊';
-            case 'Humidity':
-                if (originalType === 'Warm Core' || originalType === 'Warm') return '🏜';
-                if (originalType === 'Cold Front' || originalType === 'Cool Patch' || originalType === 'Upwelling' || originalType === 'Cold Core' || originalType === 'Cold Surface' || originalType === 'Mixed') return '💧';
-                return '🌊';
-            default:
-                return '';
-        }
-    };
 
     return (
         <div className="min-h-screen font-sans">
@@ -662,8 +689,8 @@ export default function ResearcherCompare({ theme = "light", floats: floatsProp,
                 }
                 .dark .chart-container {
                     background: linear-gradient(165deg, hsl(222 47% 9% / 1), hsl(222 47% 6% / 1)),
-                                 radial-gradient(ellipse at top left, hsl(var(--primary) / 0.15), transparent 50%),
-                                 radial-gradient(ellipse at bottom right, hsl(var(--primary) / 0.25), transparent 60%);
+                                    radial-gradient(ellipse at top left, hsl(var(--primary) / 0.15), transparent 50%),
+                                    radial-gradient(ellipse at bottom right, hsl(var(--primary) / 0.25), transparent 60%);
                     box-shadow: 0 20px 25px -5px rgba(0,0,0,0.3), 0 10px 10px -5px rgba(0,0,0,0.1), inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
                     border: 1px solid hsl(var(--border));
                 }
@@ -698,7 +725,7 @@ export default function ResearcherCompare({ theme = "light", floats: floatsProp,
                                         role="region"
                                         aria-label={`Chart displaying float ${dataType} profiles`}
                                     >
-                                        {PlotComponent && React.createElement(PlotComponent as any, {
+                                        {Plotly && React.createElement(Plotly as any, {
                                             data: animatedTraces,
                                             layout: layout,
                                             config: config,
